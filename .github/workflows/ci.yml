@@ -37,14 +37,15 @@ jobs:
         run: |
            sudo apt-get update
            sudo apt-get install -y google-chrome-stable
-           sudo apt-get install -y chromedriver
+           
 
-      - name: Build project
-        run: mvn clean install
+      
 
       # Step 5: Run the specific TestNG suite
       - name: Run tests with debug logs
         working-directory: Noon-CMS
+        env:
+          CI: true # Ensure CI environment variable is set for headless mode
         run: mvn test -Dtest=HomePageTests#checkChangeCountryFunctionality_NC15
         #mvn test -Dtest=NoonMPSmokeTest
 
