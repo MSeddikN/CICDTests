@@ -32,6 +32,15 @@ jobs:
       - name: Install dependencies
         working-directory: Noon-CMS
         run: mvn install -DskipTests
+        
+      - name: Install Chrome and Chromedriver
+        run: |
+           sudo apt-get update
+           sudo apt-get install -y google-chrome-stable
+           sudo apt-get install -y chromedriver
+
+      - name: Build project
+        run: mvn clean install
 
       # Step 5: Run the specific TestNG suite
       - name: Run tests with debug logs
@@ -47,9 +56,5 @@ jobs:
           name: test-report
           path: Noon-CMS/target/surefire-reports/
 
-      - name: Install Chrome and Chromedriver
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          sudo apt-get install -y chromedriver
+      
     
