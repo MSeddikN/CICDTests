@@ -43,8 +43,8 @@ jobs:
       # Step 6: Install Chrome
       - name: Install Chrome
         run: |
-          apt-get update
-          apt-get install -y google-chrome-stable
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
       # Step 7: Run the specific TestNG suite
       - name: Run tests with debug logs
