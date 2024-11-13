@@ -3,10 +3,10 @@ name: Run UI Tests from Noon-CMS
 on:
   push:
     branches:
-      - '*'
+      - '*' # Trigger on pushes to any branch
   pull_request:
     branches:
-      - main  # Trigger on pull requests targeting the main branch of the `test` repo
+      - main # Trigger on pull requests targeting the main branch
 
 jobs:
   run-tests:
@@ -21,20 +21,27 @@ jobs:
       - name: Clone Noon-CMS repository
         run: git clone https://x-access-token:${{ secrets.NOON_CMS_TOKEN }}@github.com/MSeddikN/Noon-CMS.git
 
-
-      # Step 3: Set up Java (if needed by the Noon-CMS project)
+      # Step 3: Set up Java (required for the Noon-CMS project)
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '21' # Replace with the Java version used in Noon-CMS
+          java-version: '21'
           distribution: 'temurin'
 
-      # Step 4: Install dependencies for Noon-CMS
+      # Step 4: Install dependencies (skip tests during this phase)
       - name: Install dependencies
         working-directory: Noon-CMS
-        run: mvn install
+        run: mvn install -DskipTests
 
-      # Step 5: Run tests from Noon-CMS
-      - name: Run tests
+      # Step 5: Run the specific TestNG suite
+      - name: Run tests with debug logs
         working-directory: Noon-CMS
-        run: mvn test -DsuiteXmlFile=src/test/suites/SmokeTests/NoonSmokeTest.xml
+        run: mvn test -DsuiteXmlFile=src/test/suites/SmokeTests/NoonSmokeTest.xml -X
+
+      # Step 6: Upload test reports for debugging
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: Noon-CMS/target/surefire-reports/
