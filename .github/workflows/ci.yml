@@ -36,7 +36,7 @@ jobs:
       # Step 5: Run the specific TestNG suite
       - name: Run tests with debug logs
         working-directory: Noon-CMS
-        run: mvn test -DsuiteXmlFile=src/test/suites/SmokeTests/NoonSmokeTest.xml -X
+        run: mvn test -Dtest=NoonMPSmokeTest
 
       # Step 6: Upload test reports for debugging
       - name: Upload test report
