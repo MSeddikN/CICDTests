@@ -36,8 +36,8 @@ jobs:
       # Step 5: Install Chrome
       - name: Install Chrome
         run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          apt-get update
+          apt-get install -y google-chrome-stable
 
       # Step 6: Run the specific TestNG suite
       - name: Run tests with debug logs
@@ -54,21 +54,15 @@ jobs:
           name: test-report
           path: Noon-CMS/target/surefire-reports/
 
-      # Step 8: Deploy screenshots to GitHub Pages
-      - name: Deploy screenshots to GitHub Pages
-        if: always() # Run this step regardless of success or failure
+ # Step 8: Upload screenshots as artifacts
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshots
+          path: Noon-CMS/src/main/resources/screenshots/
+
+      # Step 9: Log artifact link for easy reference
+      - name: Log artifact link
         run: |
-          git config --local user.name "GitHub Actions"
-          git config --local user.email "actions@github.com"
-          cd Noon-CMS
-          git fetch
-          git checkout -b gh-pages origin/gh-pages || git checkout gh-pages
-          mkdir -p screenshots
-          mv src/main/resources/screenshots/* screenshots/
-          git add screenshots/
-          if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "Add screenshots from CI run"
-            git push origin gh-pages
-          else
-            echo "No screenshots to upload."
-          fi
+          echo "Screenshots uploaded! Download them from the [Artifacts section](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})."
