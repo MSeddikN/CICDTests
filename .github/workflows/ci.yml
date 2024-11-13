@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the `test` repository
+      # Step 1: Check out the repository
       - name: Checkout test repository
         uses: actions/checkout@v3
 
@@ -33,23 +33,20 @@ jobs:
         working-directory: Noon-CMS
         run: mvn install -DskipTests
         
-      - name: Install Chrome and Chromedriver
+      # Step 5: Install Chrome
+      - name: Install Chrome
         run: |
-           sudo apt-get update
-           sudo apt-get install -y google-chrome-stable
-           
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
-      
-
-      # Step 5: Run the specific TestNG suite
+      # Step 6: Run the specific TestNG suite
       - name: Run tests with debug logs
         working-directory: Noon-CMS
         env:
           CI: true # Ensure CI environment variable is set for headless mode
         run: mvn test -Dtest=HomePageTests#checkChangeCountryFunctionality_NC15
-        #mvn test -Dtest=NoonMPSmokeTest
 
-      # Step 6: Upload test reports for debugging
+      # Step 7: Upload test reports for debugging
       - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v3
@@ -57,5 +54,21 @@ jobs:
           name: test-report
           path: Noon-CMS/target/surefire-reports/
 
-      
-    
+      # Step 8: Deploy screenshots to GitHub Pages
+      - name: Deploy screenshots to GitHub Pages
+        if: always() # Run this step regardless of success or failure
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          cd Noon-CMS
+          git fetch
+          git checkout -b gh-pages origin/gh-pages || git checkout gh-pages
+          mkdir -p screenshots
+          mv src/main/resources/screenshots/* screenshots/
+          git add screenshots/
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "Add screenshots from CI run"
+            git push origin gh-pages
+          else
+            echo "No screenshots to upload."
+          fi
