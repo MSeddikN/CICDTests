@@ -1,0 +1,38 @@
+name: Run UI Tests from Noon-CMS
+
+on:
+  push:
+    branches:
+      - main  # Trigger on commits to the main branch of the `test` repo
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests targeting the main branch of the `test` repo
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the `test` repository
+      - name: Checkout test repository
+        uses: actions/checkout@v3
+
+      # Step 2: Clone the Noon-CMS repository
+      - name: Clone Noon-CMS repository
+        run: git clone https://github.com/MSeddikN/Noon-CMS.git
+
+      # Step 3: Set up Java (if needed by the Noon-CMS project)
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21' # Replace with the Java version used in Noon-CMS
+
+      # Step 4: Install dependencies for Noon-CMS
+      - name: Install dependencies
+        working-directory: Noon-CMS
+        run: mvn install
+
+      # Step 5: Run tests from Noon-CMS
+      - name: Run tests
+        working-directory: Noon-CMS
+        run: mvn test
