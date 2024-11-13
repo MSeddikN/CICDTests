@@ -3,7 +3,7 @@ name: Run UI Tests from Noon-CMS
 on:
   push:
     branches:
-      - main  # Trigger on commits to the main branch of the `test` repo
+      - '*'
   pull_request:
     branches:
       - main  # Trigger on pull requests targeting the main branch of the `test` repo
