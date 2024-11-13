@@ -28,25 +28,32 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      # Step 4: Install dependencies (skip tests during this phase)
+      # Step 4: Clean the screenshots folder
+      - name: Clean screenshots folder
+        run: |
+          rm -rf Noon-CMS/src/main/resources/screenshots/
+          mkdir -p Noon-CMS/src/main/resources/screenshots/
+
+          
+      # Step 5: Install dependencies (skip tests during this phase)
       - name: Install dependencies
         working-directory: Noon-CMS
         run: mvn install -DskipTests
         
-      # Step 5: Install Chrome
+      # Step 6: Install Chrome
       - name: Install Chrome
         run: |
           apt-get update
           apt-get install -y google-chrome-stable
 
-      # Step 6: Run the specific TestNG suite
+      # Step 7: Run the specific TestNG suite
       - name: Run tests with debug logs
         working-directory: Noon-CMS
         env:
           CI: true # Ensure CI environment variable is set for headless mode
         run: mvn test -Dtest=HomePageTests#checkChangeCountryFunctionality_NC15
 
-      # Step 7: Upload test reports for debugging
+      # Step 8: Upload test reports for debugging
       - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v3
@@ -54,7 +61,7 @@ jobs:
           name: test-report
           path: Noon-CMS/target/surefire-reports/
 
- # Step 8: Upload screenshots as artifacts
+     # Step 9: Upload screenshots as artifacts
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v3
@@ -62,7 +69,7 @@ jobs:
           name: screenshots
           path: Noon-CMS/src/main/resources/screenshots/
 
-      # Step 9: Log artifact link for easy reference
+      # Step 10: Log artifact link for easy reference
       - name: Log artifact link
         run: |
           echo "Screenshots uploaded! Download them from the [Artifacts section](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})."
