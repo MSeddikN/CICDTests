@@ -46,3 +46,10 @@ jobs:
         with:
           name: test-report
           path: Noon-CMS/target/surefire-reports/
+
+      - name: Install Chrome and Chromedriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y chromedriver
+    
