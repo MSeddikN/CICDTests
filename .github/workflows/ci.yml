@@ -27,6 +27,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '21' # Replace with the Java version used in Noon-CMS
+          distribution: 'temurin'
 
       # Step 4: Install dependencies for Noon-CMS
       - name: Install dependencies
