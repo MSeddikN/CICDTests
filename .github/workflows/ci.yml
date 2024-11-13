@@ -37,4 +37,4 @@ jobs:
       # Step 5: Run tests from Noon-CMS
       - name: Run tests
         working-directory: Noon-CMS
-        run: mvn test
+        run: mvn test -DsuiteXmlFile=src/test/suites/SmokeTests/NoonSmokeTest.xml
