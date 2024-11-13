@@ -19,7 +19,7 @@ jobs:
 
       # Step 2: Clone the Noon-CMS repository
       - name: Clone Noon-CMS repository
-        run: git clone https://x-access-token:${{ secrets.NOON_CMS_PAT }}@github.com/MSeddikN/Noon-CMS.git
+        run: git clone https://x-access-token:${{ secrets.NOON_CMS_TOKEN }}@github.com/MSeddikN/Noon-CMS.git
 
 
       # Step 3: Set up Java (if needed by the Noon-CMS project)
