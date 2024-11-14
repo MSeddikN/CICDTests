@@ -44,9 +44,9 @@ jobs:
       # Step 6: Install Chrome
       - name: Install Chrome
         run: |
-          sudo brew update
-          sudo brew install --cask google-chrome
-          sudo brew install chromedriver
+            brew update
+            brew install --cask google-chrome
+            brew install chromedriver
           #sudo apt-get update
           #sudo apt-get install -y google-chrome-stable 
 
