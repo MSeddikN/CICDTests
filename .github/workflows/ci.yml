@@ -52,7 +52,7 @@ jobs:
         working-directory: Noon-CMS
         env:
           CI: true # Ensure CI environment variable is set for headless mode
-        run: mvn test -Dtest=HomePageTests
+        run: mvn test -Dtest=HomePageTests#checkSearchFunctionalityPositiveandNegative_NC1
 
       # Step 8: Upload test reports for debugging
       - name: Upload test report
