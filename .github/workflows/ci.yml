@@ -10,7 +10,7 @@ on:
 
 jobs:
   run-tests:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       # Step 1: Check out the repository
@@ -39,21 +39,23 @@ jobs:
       # Step 5: Install dependencies (skip tests during this phase)
       - name: Install dependencies
         working-directory: Noon-CMS
-        run: mvn install -DskipTests
+        run: sudo mvn install -DskipTests
         
       # Step 6: Install Chrome
       - name: Install Chrome
         run: |
-         # brew install --cask google-chrome
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable 
+          sudo brew update
+          sudo brew install --cask google-chrome
+          sudo brew install chromedriver
+          #sudo apt-get update
+          #sudo apt-get install -y google-chrome-stable 
 
       # Step 7: Run the specific TestNG suite
       - name: Run tests with debug logs
         working-directory: Noon-CMS
         env:
           CI: true # Ensure CI environment variable is set for headless mode
-        run: mvn test -Dtest=HomePageTests#CreateSearchPage_NC17
+        run: sudo mvn test -Dtest=HomePageTests#CreateSearchPage_NC17
 
       # Step 8: Upload test reports for debugging
       - name: Upload test report
