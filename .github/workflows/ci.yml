@@ -34,6 +34,7 @@ jobs:
         run: |
           rm -rf Noon-CMS/src/main/resources/screenshots/
           mkdir -p Noon-CMS/src/main/resources/screenshots/
+          chmod -R 777 Noon-CMS/src/main/resources/screenshots/
 
           
       # Step 5: Install dependencies (skip tests during this phase)
