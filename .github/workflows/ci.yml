@@ -44,8 +44,9 @@ jobs:
       # Step 6: Install Chrome
       - name: Install Chrome
         run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          brew install --cask google-chrome
+         # sudo apt-get update
+         # sudo apt-get install -y google-chrome-stable , i used this when using ubuntu
 
       # Step 7: Run the specific TestNG suite
       - name: Run tests with debug logs
