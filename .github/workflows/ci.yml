@@ -39,7 +39,7 @@ jobs:
       # Step 5: Install dependencies (skip tests during this phase)
       - name: Install dependencies
         working-directory: Noon-CMS
-        run: 
+        run: |
             brew install maven
             sudo mvn install -DskipTests
         
