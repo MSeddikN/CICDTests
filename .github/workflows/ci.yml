@@ -10,7 +10,7 @@ on:
 
 jobs:
   run-tests:
-    runs-on: macos-12
+    runs-on: macos-latest
 
     steps:
       # Step 1: Check out the repository
@@ -39,7 +39,9 @@ jobs:
       # Step 5: Install dependencies (skip tests during this phase)
       - name: Install dependencies
         working-directory: Noon-CMS
-        run: sudo mvn install -DskipTests
+        run: 
+            brew install maven
+            sudo mvn install -DskipTests
         
       # Step 6: Install Chrome
       - name: Install Chrome
