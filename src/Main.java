@@ -6,7 +6,7 @@ public class Main {
 //    }
     public static String sayHello(String name) {
         // You can print to STDOUT for debugging if you need to:
-        System.out.print("Hello "+name);
+        System.out.print("Hello 1"+name);
 
         // but you need to return the correct value in order to pass the challenge
         return name; // TODO: return the correct value
