@@ -56,7 +56,7 @@ jobs:
         working-directory: Noon-CMS
         env:
           CI: true # Ensure CI environment variable is set for headless mode
-        run:  mvn test -Dtest=PageBuilderTests#AddNewVersionToAPage_NC30
+        run:  mvn test -Dtest=HomePageTests
 
       # Step 8: Upload test reports for debugging
       - name: Upload test report
