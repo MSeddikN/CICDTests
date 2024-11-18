@@ -13,7 +13,9 @@ public class Main {
     }
     public static void main(String[]args){
 //        firstNonRepeatingLetter("sTreSs");
-        System.out.println(firstNonRepeatingLetter("moonmen"));
+//        System.out.println(firstNonRepeatingLetter("moonmen"));
+        reverseNumber(987);
+        palindromeChainLength(89);
     }
 
 
@@ -30,5 +32,30 @@ public class Main {
             }
         }
         return "";
+    }
+
+    public static int palindromeChainLength(long n) {
+        // reverse the given number
+        long reversedNumber = reverseNumber(n);
+        int i =0;
+
+            //break the addition loop if the result number's reversed is the same as original
+            while(n!= reverseNumber(n)){
+                n= n+reverseNumber(n);
+                i++;
+            }
+
+        //return the iterations number
+        System.out.println(i);
+        return i;
+    }
+
+    public static long reverseNumber(long n){
+        String strNumber = String.valueOf(n);
+        String strReverseNumber = new StringBuilder(strNumber).reverse().toString();
+        long reversedNumber = Long.parseLong(strReverseNumber);
+        //continue the reverse process
+//        System.out.println(reversedNumber);
+        return reversedNumber;
     }
 }
