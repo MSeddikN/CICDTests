@@ -15,7 +15,7 @@ public class Main {
 //        firstNonRepeatingLetter("sTreSs");
 //        System.out.println(firstNonRepeatingLetter("moonmen"));
         reverseNumber(98);
-        palindromeChainLength(8);
+        palindromeChainLength(12);
     }
 
 
