@@ -20,7 +20,9 @@ jobs:
 
       # Step 2: Clone the Noon-CMS repository
       - name: Clone Noon-CMS repository
-        run: git clone https://x-access-token:${{ secrets.NOON_CMS_TOKEN }}@github.com/MSeddikN/Noon-CMS.git
+       # run: git clone https://x-access-token:${{ secrets.NOON_CMS_TOKEN }}@github.com/MSeddikN/Noon-CMS.git
+        run: git clone https://x-access-token:${{ secrets.NOON_CMS_TOKEN }}@github.com:MSeddikN/Noon-API.git
+
 
       # Step 3: Set up Java (required for the Noon-CMS project)
       - name: Set up Java
@@ -39,7 +41,7 @@ jobs:
           
       # Step 5: Install dependencies (skip tests during this phase)
       - name: Install dependencies
-        working-directory: Noon-CMS
+        working-directory: Noon-API #Noon-API Noon-CMS
         run: |
             #brew install maven
              mvn install -DskipTests
@@ -53,10 +55,10 @@ jobs:
 
       # Step 7: Run the specific TestNG suite
       - name: Run tests with debug logs
-        working-directory: Noon-CMS
+        working-directory: Noon-API #Noon-API Noon-CMS
         env:
           CI: true # Ensure CI environment variable is set for headless mode
-        run:  mvn test -Dtest=HomePageTests
+        run:  mvn test -Dtest=NoonSimpleTests#CICDTest #NoonSimpleTests HomePageTests
 
       # Step 8: Upload test reports for debugging
       - name: Upload test report
