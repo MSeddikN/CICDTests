@@ -44,7 +44,8 @@ jobs:
         working-directory: Noon-API #Noon-API Noon-CMS
         run: |
             #brew install maven
-             mvn install -DskipTests
+             mvn install 
+             # -DskipTests
         
       # # Step 6: Install Chrome
       # - name: Install Chrome
