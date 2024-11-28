@@ -61,13 +61,13 @@ jobs:
           CI: true # Ensure CI environment variable is set for headless mode
         run:   mvn test -DsuiteXmlFile=src/test/suites/TestSuite.xml      #NoonSimpleTests HomePageTests
 
-      # Step 8: Upload test reports for debugging
-      - name: Upload test report
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-report
-          path: Noon-API/target/surefire-reports/
+      # # Step 8: Upload test reports for debugging
+      # - name: Upload test report
+      #   if: always()
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: test-report
+      #     path: Noon-API/target/surefire-reports/
 
 #     # Step 9: Upload screenshots as artifacts
 #      - name: Upload screenshots
@@ -78,6 +78,6 @@ jobs:
 #          path: Noon-CMS/src/main/resources/screenshots/
 
       # Step 10: Log artifact link for easy reference
-      - name: Log artifact link
-        run: |
-          echo "Screenshots uploaded! Download them from the [Artifacts section](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+      # - name: Log artifact link
+      #   run: |
+      #     echo "Screenshots uploaded! Download them from the [Artifacts section](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})."
