@@ -61,13 +61,13 @@ jobs:
           CI: true # Ensure CI environment variable is set for headless mode
         run:   mvn test -DsuiteXmlFile=src/test/suites/TestSuite.xml      #NoonSimpleTests HomePageTests
 
-      # # Step 8: Upload test reports for debugging
-      # - name: Upload test report
-      #   if: always()
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: test-report
-      #     path: Noon-API/target/surefire-reports/
+      # Step 8: Upload test reports for debugging
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: Noon-API/target/surefire-reports/
 
 #     # Step 9: Upload screenshots as artifacts
 #      - name: Upload screenshots
