@@ -58,7 +58,7 @@ jobs:
         working-directory: Noon-API #Noon-API Noon-CMS
         env:
           CI: true # Ensure CI environment variable is set for headless mode
-        run:   mvn test -DsuiteXmlFile=src/test/suites/TestSuite.xml      #NoonSimpleTests HomePageTests
+        run:   mvn test -DsuiteXmlFile=src/test/resources/suites/TestSuite.xml      #NoonSimpleTests HomePageTests
 
       # Step 8: Upload test reports for debugging
       - name: Upload test report
